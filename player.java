@@ -72,6 +72,7 @@ class player extends JComponent implements Runnable, KeyListener, MouseListener,
                         JLabelSetup(reset,80,"To erase everything: N",Color.RED);
                         JLabelSetup(colors,100,"Switch between r, g, and b and increase or decrease values of selected attribute: ARROW KEYS",Color.PINK);
             }
+            // this program's common way of setting up the JLabels in the controls list
             void JLabelSetup(JLabel jla, int locy, String t, Color fgnd){
                         jla.setSize(jfm.dx,jfm.dy);
                         jla.setVerticalAlignment(JLabel.TOP);
@@ -87,6 +88,17 @@ class player extends JComponent implements Runnable, KeyListener, MouseListener,
                         fill.setVisible(vis);
                         reset.setVisible(vis);
                         colors.setVisible(vis);
+            }
+            // We call this function so that when everything is removed from
+            // the player, the labels are re-added
+            void reAddJLabels(){
+                        add(location);
+                        add(colorInfo);
+                        add(controls);
+                        add(lines);
+                        add(fill);
+                        add(reset);
+                        add(colors);
             }
             void updateDisplayText(){
                         selColAtt = "NULL";
@@ -191,13 +203,7 @@ class player extends JComponent implements Runnable, KeyListener, MouseListener,
                         // Deleting all items from the player to clear the screen
                         if(k.getKeyChar() == 'n'){
                                     removeAll();
-                                    add(location);
-                                    add(colorInfo);
-                                    add(controls);
-                                    add(lines);
-                                    add(fill);
-                                    add(reset);
-                                    add(colors);
+                                    reAddJLabels();
                         }
                         // Using the filling block
                         if(k.getKeyChar() == 'f'){
@@ -209,12 +215,6 @@ class player extends JComponent implements Runnable, KeyListener, MouseListener,
                                                 filling = false;
                                     }
                                     
-                        }
-                        // FOR WHEN THE WINDOW IS UNDECORATED, CAREFUL
-                        if(k.getKeyChar() == KeyEvent.VK_ESCAPE){
-                                    jfm.jf.removeAll();
-                                    jfm.jf.setVisible(false);
-                                    jfm.runtime.exit(0);
                         }
                         // Arrow switching between color attributes, going down
                         if(k.getKeyCode() == 37){
