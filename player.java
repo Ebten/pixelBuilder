@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.*;
 import java.awt.event.*;
-class player extends JComponent implements Runnable, KeyListener, MouseListener, MouseMotionListener{
+class player extends JComponent implements Runnable, KeyListener, MouseListener{
             Thread t;
             boolean hold = true;
             int threadTime = 100;
@@ -45,7 +45,6 @@ class player extends JComponent implements Runnable, KeyListener, MouseListener,
                         controlsListSetup();
                         addKeyListener(this);
                         addMouseListener(this);
-                        addMouseMotionListener(this);
                         setFocusable(true);
                         start();
             }
@@ -322,6 +321,4 @@ class player extends JComponent implements Runnable, KeyListener, MouseListener,
             }
             public void mouseEntered(MouseEvent me){}
             public void mouseExited(MouseEvent me){}
-            public void mouseMoved(MouseEvent me){}
-            public void mouseDragged(MouseEvent me){}
 }
